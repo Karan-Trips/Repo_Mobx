@@ -28,7 +28,7 @@ abstract class _UserStore with Store {
 
   @observable
   ObservableFuture<bool>? connectionStatus;
-
+ 
   @observable
   Datum? selectedUser;
 

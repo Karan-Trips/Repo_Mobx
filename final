@@ -1,0 +1,365 @@
+[33mcommit f3d39c535ca2da1fc776d78a3084d31b84f6dcbc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: KARAN SHANKAR TRIPATHI <karanboss652@gmail.com>
+Date:   Fri May 31 12:40:20 2024 +0530
+
+    final Repo Mobx
+
+[1mdiff --git a/lib/model/ExceptionModel/exception_model.dart b/lib/model/ExceptionModel/exception_model.dart[m
+[1mindex 24d3bca..3c5c605 100644[m
+[1m--- a/lib/model/ExceptionModel/exception_model.dart[m
+[1m+++ b/lib/model/ExceptionModel/exception_model.dart[m
+[36m@@ -71,3 +71,15 @@[m [mFuture<void> showToast(String message) async {[m
+       textColor: Colors.white,[m
+       fontSize: 16.0);[m
+ }[m
+[32m+[m
+[32m+[m[32mclass ApiException implements Exception {[m
+[32m+[m[32m  final int? statusCode;[m
+[32m+[m[32m  final String? message;[m
+[32m+[m
+[32m+[m[32m  ApiException(this.statusCode, [this.message]);[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  String toString() {[m
+[32m+[m[32m    return 'ApiException: $statusCode ${message ?? ''}';[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/lib/model/UserData/Api/api_services.dart b/lib/model/UserData/Api/api_services.dart[m
+[1mnew file mode 100644[m
+[1mindex 0000000..477d4ae[m
+[1m--- /dev/null[m
+[1m+++ b/lib/model/UserData/Api/api_services.dart[m
+[36m@@ -0,0 +1,25 @@[m
+[32m+[m[32mimport 'package:dio/dio.dart';[m
+[32m+[m[32mimport 'package:retrofit/retrofit.dart';[m
+[32m+[m[32mimport '../userModel/user_model.dart';[m
+[32m+[m[32mpart 'api_services.g.dart';[m
+[32m+[m
+[32m+[m[32m@RestApi(baseUrl: "https://reqres.in/api")[m
+[32m+[m[32mabstract class ApiService {[m
+[32m+[m[32m  factory ApiService(Dio dio, {String baseUrl}) = _ApiService;[m
+[32m+[m
+[32m+[m[32m  @GET("/users")[m
+[32m+[m[32m  Future<HttpResponse<UserData>> fetchUsers();[m
+[32m+[m
+[32m+[m[32m  @POST("/register")[m
+[32m+[m[32m  Future<HttpResponse<dynamic>> createUser(@Body() UserSave user);[m
+[32m+[m
+[32m+[m[32m  @POST("/login")[m
+[32m+[m[32m  Future<HttpResponse<dynamic>> loginUser(@Body() Map<String, dynamic> user);[m
+[32m+[m
+[32m+[m[32m  @PUT("/users/")[m
+[32m+[m[32m  Future<HttpResponse<dynamic>> updateUser([m
+[32m+[m[32m      @Path("id") int id, @Body() Map<String, dynamic> user);[m
+[32m+[m
+[32m+[m[32m  @DELETE("/users/")[m
+[32m+[m[32m  Future<HttpResponse<void>> deleteUser(@Path("id") int id);[m
+[32m+[m[32m}[m
+[1mdiff --git a/lib/model/UserData/Api/api_services.g.dart b/lib/model/UserData/Api/api_services.g.dart[m
+[1mnew file mode 100644[m
+[1mindex 0000000..db49ce4[m
+[1m--- /dev/null[m
+[1m+++ b/lib/model/UserData/Api/api_services.g.dart[m
+[36m@@ -0,0 +1,197 @@[m
+[32m+[m[32m// GENERATED CODE - DO NOT MODIFY BY HAND[m
+[32m+[m
+[32m+[m[32mpart of 'api_services.dart';[m
+[32m+[m
+[32m+[m[32m// **************************************************************************[m
+[32m+[m[32m// RetrofitGenerator[m
+[32m+[m[32m// **************************************************************************[m
+[32m+[m
+[32m+[m[32m// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers[m
+[32m+[m
+[32m+[m[32mclass _ApiService implements ApiService {[m
+[32m+[m[32m  _ApiService([m
+[32m+[m[32m    this._dio, {[m
+[32m+[m[32m    this.baseUrl,[m
+[32m+[m[32m  }) {[m
+[32m+[m[32m    baseUrl ??= 'https://reqres.in/api';[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  final Dio _dio;[m
+[32m+[m
+[32m+[m[32m  String? baseUrl;[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<HttpResponse<UserData>> fetchUsers() async {[m
+[32m+[m[32m    final _extra = <String, dynamic>{};[m
+[32m+[m[32m    final queryParameters = <String, dynamic>{};[m
+[32m+[m[32m    final _headers = <String, dynamic>{};[m
+[32m+[m[32m    const Map<String, dynamic>? _data = null;[m
+[32m+[m[32m    final _result = await _dio.fetch<Map<String, dynamic>>([m
+[32m+[m[32m        _setStreamType<HttpResponse<UserData>>(Options([m
+[32m+[m[32m      method: 'GET',[m
+[32m+[m[32m      headers: _headers,[m
+[32m+[m[32m      extra: _extra,[m
+[32m+[m[32m    )[m
+[32m+[m[32m            .compose([m
+[32m+[m[32m              _dio.options,[m
+[32m+[m[32m              '/users',[m
+[32m+[m[32m              queryParameters: queryParameters,[m
+[32m+[m[32m              data: _data,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            .copyWith([m
+[32m+[m[32m                baseUrl: _combineBaseUrls([m
+[32m+[m[32m              _dio.options.baseUrl,[m
+[32m+[m[32m              baseUrl,[m
+[32m+[m[32m            ))));[m
+[32m+[m[32m    final value = UserData.fromJson(_result.data!);[m
+[32m+[m[32m    final httpResponse = HttpResponse(value, _result);[m
+[32m+[m[32m    return httpResponse;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<HttpResponse<dynamic>> createUser(UserSave user) async {[m
+[32m+[m[32m    final _extra = <String, dynamic>{};[m
+[32m+[m[32m    final queryParameters = <String, dynamic>{};[m
+[32m+[m[32m    final _headers = <String, dynamic>{};[m
+[32m+[m[32m    final _data = <String, dynamic>{};[m
+[32m+[m[32m    _data.addAll(user.toJson());[m
+[32m+[m[32m    final _result =[m
+[32m+[m[32m        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options([m
+[32m+[m[32m      method: 'POST',[m
+[32m+[m[32m      headers: _headers,[m
+[32m+[m[32m      extra: _extra,[m
+[32m+[m[32m    )[m
+[32m+[m[32m            .compose([m
+[32m+[m[32m              _dio.options,[m
+[32m+[m[32m              '/register',[m
+[32m+[m[32m              queryParameters: queryParameters,[m
+[32m+[m[32m              data: _data,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            .copyWith([m
+[32m+[m[32m                baseUrl: _combineBaseUrls([m
+[32m+[m[32m              _dio.options.baseUrl,[m
+[32m+[m[32m              baseUrl,[m
+[32m+[m[32m            ))));[m
+[32m+[m[32m    final value = _result.data;[m
+[32m+[m[32m    final httpResponse = HttpResponse(value, _result);[m
+[32m+[m[32m    return httpResponse;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<HttpResponse<dynamic>> loginUser(Map<String, dynamic> user) async {[m
+[32m+[m[32m    final _extra = <String, dynamic>{};[m
+[32m+[m[32m    final queryParameters = <String, dynamic>{};[m
+[32m+[m[32m    final _headers = <String, dynamic>{};[m
+[32m+[m[32m    final _data = <String, dynamic>{};[m
+[32m+[m[32m    _data.addAll(user);[m
+[32m+[m[32m    final _result =[m
+[32m+[m[32m        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options([m
+[32m+[m[32m      method: 'POST',[m
+[32m+[m[32m      headers: _headers,[m
+[32m+[m[32m      extra: _extra,[m
+[32m+[m[32m    )[m
+[32m+[m[32m            .compose([m
+[32m+[m[32m              _dio.options,[m
+[32m+[m[32m              '/login',[m
+[32m+[m[32m              queryParameters: queryParameters,[m
+[32m+[m[32m              data: _data,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            .copyWith([m
+[32m+[m[32m                baseUrl: _combineBaseUrls([m
+[32m+[m[32m              _dio.options.baseUrl,[m
+[32m+[m[32m              baseUrl,[m
+[32m+[m[32m            ))));[m
+[32m+[m[32m    final value = _result.data;[m
+[32m+[m[32m    final httpResponse = HttpResponse(value, _result);[m
+[32m+[m[32m    return httpResponse;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<HttpResponse<dynamic>> updateUser([m
+[32m+[m[32m    int id,[m
+[32m+[m[32m    Map<String, dynamic> user,[m
+[32m+[m[32m  ) async {[m
+[32m+[m[32m    final _extra = <String, dynamic>{};[m
+[32m+[m[32m    final queryParameters = <String, dynamic>{};[m
+[32m+[m[32m    final _headers = <String, dynamic>{};[m
+[32m+[m[32m    final _data = <String, dynamic>{};[m
+[32m+[m[32m    _data.addAll(user);[m
+[32m+[m[32m    final _result =[m
+[32m+[m[32m        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options([m
+[32m+[m[32m      method: 'PUT',[m
+[32m+[m[32m      headers: _headers,[m
+[32m+[m[32m      extra: _extra,[m
+[32m+[m[32m    )[m
+[32m+[m[32m            .compose([m
+[32m+[m[32m              _dio.options,[m
+[32m+[m[32m              '/users/',[m
+[32m+[m[32m              queryParameters: queryParameters,[m
+[32m+[m[32m              data: _data,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            .copyWith([m
+[32m+[m[32m                baseUrl: _combineBaseUrls([m
+[32m+[m[32m              _dio.options.baseUrl,[m
+[32m+[m[32m              baseUrl,[m
+[32m+[m[32m            ))));[m
+[32m+[m[32m    final value = _result.data;[m
+[32m+[m[32m    final httpResponse = HttpResponse(value, _result);[m
+[32m+[m[32m    return httpResponse;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<HttpResponse<void>> deleteUser(int id) async {[m
+[32m+[m[32m    final _extra = <String, dynamic>{};[m
+[32m+[m[32m    final queryParameters = <String, dynamic>{};[m
+[32m+[m[32m    final _headers = <String, dynamic>{};[m
+[32m+[m[32m    const Map<String, dynamic>? _data = null;[m
+[32m+[m[32m    final _result =[m
+[32m+[m[32m        await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(Options([m
+[32m+[m[32m      method: 'DELETE',[m
+[32m+[m[32m      headers: _headers,[m
+[32m+[m[32m      extra: _extra,[m
+[32m+[m[32m    )[m
+[32m+[m[32m            .compose([m
+[32m+[m[32m              _dio.options,[m
+[32m+[m[32m              '/users/',[m
+[32m+[m[32m              queryParameters: queryParameters,[m
+[32m+[m[32m              data: _data,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            .copyWith([m
+[32m+[m[32m                baseUrl: _combineBaseUrls([m
+[32m+[m[32m              _dio.options.baseUrl,[m
+[32m+[m[32m              baseUrl,[m
+[32m+[m[32m            ))));[m
+[32m+[m[32m    final httpResponse = HttpResponse(null, _result);[m
+[32m+[m[32m    return httpResponse;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  RequestOptions _setStreamType<T>(RequestOptions requestOptions) {[m
+[32m+[m[32m    if (T != dynamic &&[m
+[32m+[m[32m        !(requestOptions.responseType == ResponseType.bytes ||[m
+[32m+[m[32m            requestOptions.responseType == ResponseType.stream)) {[m
+[32m+[m[32m      if (T == String) {[m
+[32m+[m[32m        requestOptions.responseType = ResponseType.plain;[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        requestOptions.responseType = ResponseType.json;[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    return requestOptions;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  String _combineBaseUrls([m
+[32m+[m[32m    String dioBaseUrl,[m
+[32m+[m[32m    String? baseUrl,[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    if (baseUrl == null || baseUrl.trim().isEmpty) {[m
+[32m+[m[32m      return dioBaseUrl;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    final url = Uri.parse(baseUrl);[m
+[32m+[m
+[32m+[m[32m    if (url.isAbsolute) {[m
+[32m+[m[32m      return url.toString();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    return Uri.parse(dioBaseUrl).resolveUri(url).toString();[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/lib/model/UserData/Repo/repo_interface.dart b/lib/model/UserData/Repo/repo_interface.dart[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7b4e53c[m
+[1m--- /dev/null[m
+[1m+++ b/lib/model/UserData/Repo/repo_interface.dart[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32mimport '../userModel/user_model.dart';[m
+[32m+[m
+[32m+[m[32mabstract class IServicesRepo {[m
+[32m+[m[32m  Future<void> fetchUsers();[m
+[32m+[m[32m  Future<void> createUser(UserSave userSave);[m
+[32m+[m[32m  Future<void> deleteUser(int id);[m
+[32m+[m[32m  Future<void> updateUser(int id, Map<String, dynamic> user);[m
+[32m+[m[32m  Future<void> loginUser(Map<String, dynamic> userSave);[m
+[32m+[m[32m}[m
+[1mdiff --git a/lib/model/UserData/Repo/services_repo.dart b/lib/model/UserData/Repo/services_repo.dart[m
+[1mnew file mode 100644[m
+[1mindex 0000000..baefeb1[m
+[1m--- /dev/null[m
+[1m+++ b/lib/model/UserData/Repo/services_repo.dart[m
+[36m@@ -0,0 +1,97 @@[m
+[32m+[m[32mimport 'package:flutter/material.dart';[m
+[32m+[m[32mimport 'package:apistsk/model/UserData/Repo/repo_interface.dart';[m
+[32m+[m[32mimport '../../ExceptionModel/exception_model.dart';[m
+[32m+[m[32mimport '../Api/api_services.dart';[m
+[32m+[m[32mimport '../userModel/user_model.dart';[m
+[32m+[m
+[32m+[m[32mclass ServicesRepo implements IServicesRepo {[m
+[32m+[m[32m  final ApiService apiService;[m
+[32m+[m
+[32m+[m[32m  ServicesRepo(this.apiService);[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<dynamic> fetchUsers() async {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      final response = await apiService.fetchUsers();[m
+[32m+[m[32m      if (response.response.statusCode == 200) {[m
+[32m+[m[32m        showToast('Data loaded successfully ${response.response.statusCode}');[m
+[32m+[m[32m        return response.data;[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        throw ApiException([m
+[32m+[m[32m            response.response.statusCode, response.response.statusMessage);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch (e) {[m
+[32m+[m[32m      debugPrint('Error fetching users: $e');[m
+[32m+[m[32m      rethrow;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<dynamic> createUser(UserSave user) async {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      final response = await apiService.createUser(user);[m
+[32m+[m[32m      if (response.response.statusCode == 200) {[m
+[32m+[m[32m        showToast([m
+[32m+[m[32m            "Account Created Successfully ${response.response.statusCode}");[m
+[32m+[m[32m        return response.data;[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        throw ApiException([m
+[32m+[m[32m            response.response.statusCode, response.response.statusMessage);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch (e) {[m
+[32m+[m[32m      debugPrint('Error creating user: $e');[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<void> deleteUser(int id) async {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      final res = await apiService.deleteUser(id);[m
+[32m+[m[32m      if (res.response.statusCode == 204) {[m
+[32m+[m[32m        debugPrint('Data deleted at $id');[m
+[32m+[m[32m        showToast("User $id Deleted  ${res.response.statusCode}");[m
+[32m+[m[32m        await fetchUsers();[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        throw ApiException(res.response.statusCode, res.response.statusMessage);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch (e) {[m
+[32m+[m[32m      debugPrint('Error deleting user: $e');[m
+[32m+[m[32m      rethrow;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<dynamic> updateUser(int id, Map<String, dynamic> user) async {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      final response = await apiService.updateUser(id, user);[m
+[32m+[m[32m      if (response.response.statusCode == 200) {[m
+[32m+[m[32m        showToast("Data Updated Successfully ${response.response.statusCode}");[m
+[32m+[m[32m        // print(response.data.toString());[m
+[32m+[m[32m        return response.data;[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        throw ApiException([m
+[32m+[m[32m            response.response.statusCode, response.response.statusMessage);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch (e) {[m
+[32m+[m[32m      debugPrint('Error updating user: $e');[m
+[32m+[m[32m      rethrow;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Future<dynamic> loginUser(Map<String, dynamic> user) async {[m
+[32m+[m[32m    try {[m
+[32m+[
