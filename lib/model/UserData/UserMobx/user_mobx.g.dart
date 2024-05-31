@@ -89,6 +89,14 @@ mixin _$UserStore on _UserStore, Store {
     });
   }
 
+  late final _$checkConnectionAsyncAction =
+      AsyncAction('_UserStore.checkConnection', context: context);
+
+  @override
+  Future<void> checkConnection() {
+    return _$checkConnectionAsyncAction.run(() => super.checkConnection());
+  }
+
   late final _$fetchUsersAsyncAction =
       AsyncAction('_UserStore.fetchUsers', context: context);
 
@@ -109,7 +117,7 @@ mixin _$UserStore on _UserStore, Store {
       AsyncAction('_UserStore.loginUser', context: context);
 
   @override
-  Future<void> loginUser(UserSave userSave) {
+  Future<void> loginUser(Map<String, dynamic> userSave) {
     return _$loginUserAsyncAction.run(() => super.loginUser(userSave));
   }
 
@@ -117,7 +125,7 @@ mixin _$UserStore on _UserStore, Store {
       AsyncAction('_UserStore.updateUser', context: context);
 
   @override
-  Future<void> updateUser(int id, SaveJob user) {
+  Future<void> updateUser(int id, Map<String, dynamic> user) {
     return _$updateUserAsyncAction.run(() => super.updateUser(id, user));
   }
 

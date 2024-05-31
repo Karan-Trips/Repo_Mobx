@@ -168,7 +168,8 @@ class _UserHomeState extends State<UserHome>
             txtcolors: Colors.white,
             onPressed: () {
               var userData =
-                  SaveJob(name: nameController.text, job: jobController.text);
+                  SaveJob(name: nameController.text, job: jobController.text)
+                      .toJson();
 
               userStore.updateUser(user.id!, userData);
               Navigator.pop(context);

@@ -111,9 +111,5 @@ class SaveJob {
   final String job;
 
   SaveJob({required this.name, required this.job});
-
-  factory SaveJob.toJson(Map<String, dynamic> json) => SaveJob(
-        name: json["name"],
-        job: json["job"],
-      );
+  Map<String, dynamic> toJson() => {'name': name, 'job': job};
 }

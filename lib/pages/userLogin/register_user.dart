@@ -33,7 +33,7 @@ class _RegisterUserState extends State<RegisterUser> {
             .createUser(user)
             .then((value) => Navigator.pushReplacementNamed(context, '/login'))
             .catchError((error) {
-          return '';
+          return '$error';
         });
         debugPrint('User saved: ${user.email}');
 
