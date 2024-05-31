@@ -2,7 +2,7 @@
 
 import 'package:mobx/mobx.dart';
 
-part 'user_mobx.g.dart';
+part 'form_mobx.g.dart';
 
 class FormStore = _FormStore with _$FormStore;
 

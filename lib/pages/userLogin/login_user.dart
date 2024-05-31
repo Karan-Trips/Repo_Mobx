@@ -6,7 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/ExceptionModel/exception_model.dart';
 import '../../model/Widgets/textformfield.dart';
-import '../../model/mobxModel/user_mobx.dart';
+import '../../model/FormMobx/form_mobx.dart';
 
 class LoginUser extends StatefulWidget {
   const LoginUser({super.key});

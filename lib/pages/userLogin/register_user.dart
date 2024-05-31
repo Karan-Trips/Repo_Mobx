@@ -8,7 +8,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/UserData/UserMobx/user_mobx.dart';
 import '../../model/Widgets/textformfield.dart';
-import '../../model/mobxModel/user_mobx.dart';
+import '../../model/FormMobx/form_mobx.dart';
 
 class RegisterUser extends StatefulWidget {
   const RegisterUser({super.key});
