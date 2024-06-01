@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:apistsk/model/ExceptionModel/exception_model.dart';
 import 'package:apistsk/model/UserData/userModel/user_model.dart';
 import 'package:apistsk/validation/user_validation.dart';
 import 'package:flutter/material.dart';
@@ -39,27 +40,10 @@ class _RegisterUserState extends State<RegisterUser> {
 
         formStore.clearEmail();
         passController.clear();
-
-        Fluttertoast.showToast(
-          msg: "Form Submitted",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 3,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
+        showToast('Form Submitted');
       } catch (error) {
         debugPrint('Error creating user: $error');
-        Fluttertoast.showToast(
-          msg: "Failed to submit form",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 3,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
+        showToast('Failed to submit form');
       }
     }
   }
