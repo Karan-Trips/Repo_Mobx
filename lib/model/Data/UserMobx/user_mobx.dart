@@ -3,7 +3,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import '../../ExceptionModel/exception_model.dart';
+import '../../Exception/exception_model.dart';
 import '../userModel/user_model.dart';
 import 'package:dio/dio.dart';
 import '../Api/api_services.dart';

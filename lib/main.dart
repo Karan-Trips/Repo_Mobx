@@ -1,11 +1,37 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'model/Data/UserMobx/user_mobx.dart';
 import 'pages/ui/home_screen.dart';
 import 'pages/userLogin/register_user.dart';
 import 'pages/userLogin/login_user.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+void setup() {
+  GetIt.instance.registerLazySingleton(() => UserStore());
+}
 
 void main() {
-  runApp(const MyApp());
+  setup();
+  final dio = Dio();
+  dio.interceptors.add(PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    responseHeader: true,
+    responseBody: true,
+    error: true,
+    compact: true,
+    request: true,
+    maxWidth: 100,
+  ));
+  runApp(DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) {
+        return const MyApp();
+      }));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +40,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // ignore: deprecated_member_use
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

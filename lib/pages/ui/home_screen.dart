@@ -1,8 +1,10 @@
-import 'package:apistsk/model/UserData/userModel/user_model.dart';
+import 'package:apistsk/model/Data/userModel/user_model.dart';
 import 'package:apistsk/model/Widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../model/UserData/UserMobx/user_mobx.dart';
+import 'package:get_it/get_it.dart';
+import '../../model/Data/Api/api_services.dart';
+import '../../model/Data/UserMobx/user_mobx.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({super.key});
@@ -16,8 +18,12 @@ class _UserHomeState extends State<UserHome>
   late TextEditingController nameController;
   late TextEditingController jobController;
   late AnimationController controller;
+  final UserStore userStore = GetIt.instance<UserStore>();
+  Future<dynamic>?
+      _data; // TODO :will be applied in Future builder future:_data like this
   @override
   void initState() {
+    _data = userStore.fetchUsers();
     userStore.fetchUsers();
     nameController = TextEditingController();
     jobController = TextEditingController();

@@ -1,13 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:apistsk/model/ExceptionModel/exception_model.dart';
-import 'package:apistsk/model/UserData/userModel/user_model.dart';
+import 'package:apistsk/model/Exception/exception_model.dart';
+import 'package:apistsk/model/Data/userModel/user_model.dart';
 import 'package:apistsk/validation/user_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import '../../model/UserData/UserMobx/user_mobx.dart';
+import '../../model/Data/UserMobx/user_mobx.dart';
 import '../../model/Widgets/textformfield.dart';
 import '../../model/FormMobx/form_mobx.dart';
 
@@ -80,7 +79,7 @@ class _RegisterUserState extends State<RegisterUser> {
                   children: [
                     Image.asset(
                       "assets/images/logo.gif",
-                      height: 230.h,
+                      height: 290.h,
                     ),
                     const HeaderTetxt(
                       text: "Register here",
