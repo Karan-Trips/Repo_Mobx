@@ -10,12 +10,13 @@ import 'pages/userLogin/login_user.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-void setup() {
+setup() {
   GetIt.instance.registerLazySingleton(() => UserStore());
 }
 
-void main() {
-  setup();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup();
   final dio = Dio();
   dio.interceptors.add(PrettyDioLogger(
     requestHeader: true,
