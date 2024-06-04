@@ -2,7 +2,6 @@ import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'model/Data/UserMobx/user_mobx.dart';
 import 'pages/ui/home_screen.dart';
 import 'pages/userLogin/register_user.dart';

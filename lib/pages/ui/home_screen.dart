@@ -3,8 +3,11 @@ import 'package:apistsk/model/Widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import '../../model/Data/Api/api_services.dart';
 import '../../model/Data/UserMobx/user_mobx.dart';
+
+void setupGetIt() {
+  GetIt.instance.registerLazySingleton(() => UserStore());
+}
 
 class UserHome extends StatefulWidget {
   const UserHome({super.key});
@@ -19,12 +22,11 @@ class _UserHomeState extends State<UserHome>
   late TextEditingController jobController;
   late AnimationController controller;
   final UserStore userStore = GetIt.instance<UserStore>();
-  Future<dynamic>?
-      _data; // TODO :will be applied in Future builder future:_data like this
+  Future<dynamic>? _data;
+
   @override
   void initState() {
     _data = userStore.fetchUsers();
-    userStore.fetchUsers();
     nameController = TextEditingController();
     jobController = TextEditingController();
     controller = BottomSheet.createAnimationController(this);
@@ -54,7 +56,7 @@ class _UserHomeState extends State<UserHome>
             );
           } else if (userStore.errorMessage.isNotEmpty) {
             return Center(
-              child: Text(userStore.errorMessage),
+              child: Text('Error:${userStore.errorMessage}'),
             );
           } else if (userStore.userData == null ||
               userStore.userData!.data.isEmpty) {
@@ -86,36 +88,7 @@ class _UserHomeState extends State<UserHome>
                       ),
                       IconButton(
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(
-                                  'User ${user.firstName} ${user.lastName}',
-                                  style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold)),
-                              content: const Text(
-                                'Do you want to Delete ?',
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.red),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('No'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    userStore.deleteUser(user.id!);
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Yes'),
-                                ),
-                              ],
-                            ),
-                          );
+                          deleteDilog(context, user);
                         },
                         icon: const Icon(Icons.delete, color: Colors.red),
                       ),
@@ -135,11 +108,39 @@ class _UserHomeState extends State<UserHome>
     );
   }
 
-  Widget editUser(Datum user) {
+  Future<dynamic> deleteDilog(BuildContext context, Datum user) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('User ${user.firstName} ${user.lastName}',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        content: const Text(
+          'Do you want to Delete ?',
+          style: TextStyle(fontSize: 18, color: Colors.red),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              userStore.deleteUser(user.id!);
+              Navigator.pop(context);
+            },
+            child: const Text('Yes'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding editUser(Datum user) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const HeaderTetxt(
               text: 'Edit', fontSize: 18, fontWeight: FontWeight.bold),
