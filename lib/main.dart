@@ -2,16 +2,11 @@ import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'model/Data/UserMobx/user_mobx.dart';
+import 'core/locator/locator.dart';
 import 'pages/ui/home_screen.dart';
 import 'pages/userLogin/register_user.dart';
 import 'pages/userLogin/login_user.dart';
-import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-setup() {
-  GetIt.instance.registerLazySingleton(() => UserStore());
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

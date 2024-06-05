@@ -1,9 +1,9 @@
-import 'package:apistsk/model/Data/userModel/user_model.dart';
-import 'package:apistsk/model/Widgets/textformfield.dart';
+import 'package:apistsk/data/userModel/user_model.dart';
+import 'package:apistsk/Widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import '../../model/Data/UserMobx/user_mobx.dart';
+import '../../data/UserMobx/user_mobx.dart';
 
 void setupGetIt() {
   GetIt.instance.registerLazySingleton(() => UserStore());

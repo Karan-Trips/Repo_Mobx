@@ -1,4 +1,4 @@
-import '../userModel/user_model.dart';
+import '../../data/userModel/user_model.dart';
 
 abstract class IServicesRepo {
   Future<void> fetchUsers();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:apistsk/model/Data/Repo/repo_interface.dart';
-import '../../Exception/exception_model.dart';
+import 'package:apistsk/core/Repo/repo_interface.dart';
+import '../Exception/exception_model.dart';
 import '../Api/api_services.dart';
-import '../userModel/user_model.dart';
+import '../../data/userModel/user_model.dart';
 
 class ServicesRepo implements IServicesRepo {
   final ApiService apiService;

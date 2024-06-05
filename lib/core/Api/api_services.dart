@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../userModel/user_model.dart';
+import '../../data/userModel/user_model.dart';
 part 'api_services.g.dart';
 
 @RestApi(baseUrl: "https://reqres.in/api")

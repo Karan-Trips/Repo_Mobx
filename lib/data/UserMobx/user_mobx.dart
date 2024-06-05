@@ -3,11 +3,11 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import '../../Exception/exception_model.dart';
+import '../../core/Exception/exception_model.dart';
 import '../userModel/user_model.dart';
 import 'package:dio/dio.dart';
-import '../Api/api_services.dart';
-import '../Repo/services_repo.dart'; // Import ServicesRepo
+import '../../core/Api/api_services.dart';
+import '../../core/Repo/services_repo.dart'; // Import ServicesRepo
 
 part 'user_mobx.g.dart';
 

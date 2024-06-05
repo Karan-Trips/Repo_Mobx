@@ -1,13 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:apistsk/model/Exception/exception_model.dart';
-import 'package:apistsk/model/Data/userModel/user_model.dart';
+import 'package:apistsk/core/Exception/exception_model.dart';
+import 'package:apistsk/data/userModel/user_model.dart';
 import 'package:apistsk/validation/user_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../model/Data/UserMobx/user_mobx.dart';
-import '../../model/Widgets/textformfield.dart';
+import '../../data/UserMobx/user_mobx.dart';
+import '../../Widgets/textformfield.dart';
 import '../../model/FormMobx/form_mobx.dart';
 
 class RegisterUser extends StatefulWidget {
