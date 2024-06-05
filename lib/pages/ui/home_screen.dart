@@ -46,7 +46,10 @@ class _UserHomeState extends State<UserHome>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {}, icon: const Icon(Icons.arrow_back_ios)),
         title: const Text('User Details'),
+        centerTitle: true,
       ),
       body: Observer(
         builder: (_) {

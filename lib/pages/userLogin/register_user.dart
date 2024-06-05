@@ -6,6 +6,7 @@ import 'package:apistsk/validation/user_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import '../../data/UserMobx/user_mobx.dart';
 import '../../Widgets/textformfield.dart';
 import '../../model/FormMobx/form_mobx.dart';
@@ -79,7 +80,7 @@ class _RegisterUserState extends State<RegisterUser> {
                   children: [
                     Image.asset(
                       "assets/images/logo.gif",
-                      height: 290.h,
+                      // height: 290.h,
                     ),
                     const HeaderTetxt(
                       text: "Register here",
@@ -207,6 +208,30 @@ class _RegisterUserState extends State<RegisterUser> {
                     ElevatedButtons(
                       onPressed: _submitForm,
                       text: "Register ",
+                      bgcolor: Colors.pink,
+                      txtcolors: Colors.white,
+                    ),
+                    SizedBox(height: 25.h),
+                    const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                            child: Divider(
+                          height: 2,
+                          color: Colors.red,
+                        )),
+                        Text(' Or '),
+                        Expanded(
+                            child: Divider(
+                          height: 2,
+                          color: Colors.red,
+                        ))
+                      ],
+                    ),
+                    ElevatedButtons(
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, '/login'),
+                      text: "Login ",
                       bgcolor: Colors.pink,
                       txtcolors: Colors.white,
                     ),
