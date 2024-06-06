@@ -6,7 +6,6 @@ import 'package:apistsk/validation/user_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
 import '../../data/UserMobx/user_mobx.dart';
 import '../../Widgets/textformfield.dart';
 import '../../model/FormMobx/form_mobx.dart';
