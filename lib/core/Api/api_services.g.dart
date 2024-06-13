@@ -124,7 +124,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/users/',
+              '/users/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -152,7 +152,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/users/',
+              '/users/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -24,7 +24,7 @@ class _RegisterUserState extends State<RegisterUser> {
   final TextEditingController confirmPassController = TextEditingController();
 
   void _submitForm() async {
-    if (loginkey.currentState!.validate()) {
+    if (loginkey.currentState != null && loginkey.currentState!.validate()) {
       var user =
           UserSave(email: emailController.text, password: passController.text);
 
@@ -227,6 +227,7 @@ class _RegisterUserState extends State<RegisterUser> {
                         ))
                       ],
                     ),
+                    SizedBox(height: 25.h),
                     ElevatedButtons(
                       onPressed: () =>
                           Navigator.pushReplacementNamed(context, '/login'),

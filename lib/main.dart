@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'core/locator/locator.dart';
 import 'pages/ui/home_screen.dart';
 import 'pages/userLogin/register_user.dart';
@@ -11,6 +12,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
+  const secureStorage = FlutterSecureStorage();
   final dio = Dio();
   dio.interceptors.add(PrettyDioLogger(
     requestHeader: true,

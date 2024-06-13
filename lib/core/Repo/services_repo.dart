@@ -7,14 +7,17 @@ import '../../data/userModel/user_model.dart';
 class ServicesRepo implements IServicesRepo {
   final ApiService apiService;
 
-  ServicesRepo(this.apiService);
+  ServicesRepo(
+    this.apiService,
+  );
 
   @override
-  Future<dynamic> fetchUsers() async {
+  Future<UserData> fetchUsers() async {
     try {
       final response = await apiService.fetchUsers();
       if (response.response.statusCode == 200) {
         showToast('Data loaded successfully ${response.response.statusCode}');
+
         return response.data;
       } else {
         throw ApiException(
@@ -33,6 +36,10 @@ class ServicesRepo implements IServicesRepo {
       if (response.response.statusCode == 200) {
         showToast(
             "Account Created Successfully ${response.response.statusCode}");
+        final token = response.data['token'];
+        // final userId = response.data['id'];
+        debugPrint(token.toString());
+        
         return response.data;
       } else {
         throw ApiException(
@@ -40,6 +47,7 @@ class ServicesRepo implements IServicesRepo {
       }
     } catch (e) {
       debugPrint('Error creating user: $e');
+      rethrow;
     }
   }
 
@@ -66,7 +74,6 @@ class ServicesRepo implements IServicesRepo {
       final response = await apiService.updateUser(id, user);
       if (response.response.statusCode == 200) {
         showToast("Data Updated Successfully ${response.response.statusCode}");
-        // print(response.data.toString());
         return response.data;
       } else {
         throw ApiException(

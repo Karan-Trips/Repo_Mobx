@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../data/userModel/user_model.dart';
+
 part 'api_services.g.dart';
 
 @RestApi(baseUrl: "https://reqres.in/api")
@@ -16,11 +17,11 @@ abstract class ApiService {
 
   @POST("/login")
   Future<HttpResponse<dynamic>> loginUser(@Body() Map<String, dynamic> user);
-
-  @PUT("/users/")
+  
+  @PUT("/users/{id}")
   Future<HttpResponse<dynamic>> updateUser(
       @Path("id") int id, @Body() Map<String, dynamic> user);
 
-  @DELETE("/users/")
+  @DELETE("/users/{id}")
   Future<HttpResponse<void>> deleteUser(@Path("id") int id);
 }

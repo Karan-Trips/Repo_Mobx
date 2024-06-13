@@ -26,8 +26,6 @@ class _LoginUserState extends State<LoginUser> {
       var userLogin =
           UserSave(email: emailController.text, password: passController.text)
               .toJson();
-      // print(userLogin.toString());
-
       userStore
           .loginUser(userLogin)
           .then((value) => Navigator.pushNamed(context, '/home'))
